@@ -35,7 +35,8 @@ class Book {
         self.authors = authors
         self.publishedDate = publishedDate
         self.description = description
-        self.thumbnail = thumbnail
+        self.thumbnail = ""
+        
     }
     
     static func buildBook(from data: Data) -> [Book]? {
@@ -91,6 +92,46 @@ class Book {
             print("Error published: \(volumeInfoDict)")
         } catch let Parsing.images(volumeInfo: volumeInfoDict) {
             print("Error images: \(volumeInfoDict)")
+        } catch {
+            print(error)
+        }
+        return bookArr
+    }
+    
+    static func buildDetailBookImage(from data: Data) -> [Book]? {
+        var bookArr = [Book]()
+        do {
+            let json: Any = try JSONSerialization.jsonObject(with: data, options: [])
+            guard let bookJson = json as? [String: AnyObject] else {
+                print("error json")
+                return nil
+            }
+            guard let volumeInfoDict = bookJson["volumeInfo"] as? [String: AnyObject] else {
+                print("error volume")
+                return nil
+            }
+            
+            guard let title = volumeInfoDict["title"] as? String,
+                let authors = volumeInfoDict["authors"] as? [String],
+                let publishedDate = volumeInfoDict["pulishedDate"] as? String,
+                let description = volumeInfoDict["description"] as? String else {
+                    print("error book details")
+                    return nil
+            }
+            
+            //images
+            guard let imageLinks = volumeInfoDict["imageLinks"] as? [String: AnyObject] else {
+                print("error image")
+                return nil
+            }
+            
+            guard let thumbnail = imageLinks["small"] as? String else {
+                print("error images")
+                return nil
+            }
+            
+            let bookProperties = Book.init(id: "", title: title, authors: authors, publishedDate: publishedDate, description: description, thumbnail: thumbnail)
+            bookArr.append(bookProperties)
         } catch {
             print(error)
         }

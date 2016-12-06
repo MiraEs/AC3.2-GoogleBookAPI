@@ -10,6 +10,7 @@ import UIKit
 
 class DetailViewController: UIViewController {
     var detailBook: Book?
+    var detailBookProperties: [Book]()
     let volumeEndpoint = "https://www.googleapis.com/books/v1/volumes/"
     
     
@@ -23,7 +24,7 @@ class DetailViewController: UIViewController {
         detailBookTitle.text = detailBook?.title
         detailBookDescription.text = detailBook?.description
         detailBookAuthor.text = allAuthors()
-        image()
+        //image()
     }
     
     
@@ -44,6 +45,19 @@ class DetailViewController: UIViewController {
                     self.detailBookImage.setNeedsLayout()
                 }
             })
+        }
+    }
+    
+    func detailImage() {
+        APIManager.manager.getData(endPoint: volumeEndpoint+(detailBook?.id)!) { (data: Data?) in
+            guard let validData = data else { return }
+            let validDetailBook = Book.buildDetailBookImage(from: validData) {
+                    DispatchQueue.main.async {
+                        self.detailBookProperties = validDetailBook
+                        
+                    }
+                }
+            }
         }
     }
     
