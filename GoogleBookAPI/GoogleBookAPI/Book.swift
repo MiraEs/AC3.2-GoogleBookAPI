@@ -27,8 +27,9 @@ class Book {
     internal let publishedDate: String
     internal let description: String
     internal let thumbnail: String?
+    //internal let largeImg: String?
     
-    init(id: String, title: String, authors: [String], publishedDate: String, description: String, thumbnail: String) {
+    init(id: String, title: String, authors: [String], publishedDate: String, description: String, thumbnail: String?) {
         self.id = id
         self.title = title
         self.authors = authors

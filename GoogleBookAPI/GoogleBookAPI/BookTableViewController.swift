@@ -11,7 +11,6 @@ import UIKit
 
 class BookTableViewController: UITableViewController {
     let endpoint = "https://www.googleapis.com/books/v1/volumes?q=banana"
-    var bookObject: Book!
     var books = [Book]()
     
     override func viewDidLoad() {

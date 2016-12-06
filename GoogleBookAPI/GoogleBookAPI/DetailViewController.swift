@@ -10,6 +10,9 @@ import UIKit
 
 class DetailViewController: UIViewController {
     var detailBook: Book?
+    let volumeEndpoint = "https://www.googleapis.com/books/v1/volumes/"
+    
+    
     @IBOutlet weak var detailBookDescription: UITextView!
     @IBOutlet weak var detailBookAuthor: UILabel!
     @IBOutlet weak var detailBookTitle: UILabel!
@@ -23,6 +26,7 @@ class DetailViewController: UIViewController {
         image()
     }
     
+    
     func allAuthors() -> String {
         var authors = ""
         for author in (detailBook?.authors)! {
@@ -33,7 +37,7 @@ class DetailViewController: UIViewController {
     
     func image() {
         if detailBook?.thumbnail != nil {
-            APIManager.manager.getData(endPoint: (detailBook?.thumbnail!)!, callback: { (data: Data?) in
+            APIManager.manager.getData(endPoint: (detailBook?.thumbnail)!, callback: { (data: Data?) in
                 guard let validData = data else { return }
                 DispatchQueue.main.async {
                     self.detailBookImage.image = UIImage(data: validData)
@@ -42,7 +46,7 @@ class DetailViewController: UIViewController {
             })
         }
     }
-
-
+    
+    
 }
 
