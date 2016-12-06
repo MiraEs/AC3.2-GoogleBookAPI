@@ -43,6 +43,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E317F8F21DF6648100C35B28 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E324F6401DF5192B005D9C0E /* Book.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		E317F8F31DF6648A00C35B28 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				E324F63E1DF4A44D005D9C0E /* BookTableViewController.swift */,
+				E324F62E1DF49669005D9C0E /* DetailViewController.swift */,
+			);
+			name = VC;
+			sourceTree = "<group>";
+		};
+		E317F8F41DF6649A00C35B28 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				E324F62C1DF49669005D9C0E /* AppDelegate.swift */,
+				E324F6331DF49669005D9C0E /* Assets.xcassets */,
+				E324F6351DF49669005D9C0E /* LaunchScreen.storyboard */,
+				E324F6381DF49669005D9C0E /* Info.plist */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		E324F6201DF49669005D9C0E = {
 			isa = PBXGroup;
 			children = (
@@ -62,16 +90,12 @@
 		E324F62B1DF49669005D9C0E /* GoogleBookAPI */ = {
 			isa = PBXGroup;
 			children = (
-				E324F62C1DF49669005D9C0E /* AppDelegate.swift */,
-				E324F63E1DF4A44D005D9C0E /* BookTableViewController.swift */,
-				E324F6441DF530D6005D9C0E /* BookTableViewCell.swift */,
-				E324F6421DF51E97005D9C0E /* APIManager.swift */,
-				E324F6401DF5192B005D9C0E /* Book.swift */,
-				E324F62E1DF49669005D9C0E /* DetailViewController.swift */,
 				E324F6301DF49669005D9C0E /* Main.storyboard */,
-				E324F6331DF49669005D9C0E /* Assets.xcassets */,
-				E324F6351DF49669005D9C0E /* LaunchScreen.storyboard */,
-				E324F6381DF49669005D9C0E /* Info.plist */,
+				E324F6421DF51E97005D9C0E /* APIManager.swift */,
+				E317F8F31DF6648A00C35B28 /* VC */,
+				E324F6441DF530D6005D9C0E /* BookTableViewCell.swift */,
+				E317F8F21DF6648100C35B28 /* Model */,
+				E317F8F41DF6649A00C35B28 /* Helpers */,
 			);
 			path = GoogleBookAPI;
 			sourceTree = "<group>";
@@ -313,6 +337,7 @@
 				E324F63D1DF49669005D9C0E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -18,6 +18,29 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         detailBookTitle.text = detailBook?.title
+        detailBookDescription.text = detailBook?.description
+        detailBookAuthor.text = allAuthors()
+        image()
+    }
+    
+    func allAuthors() -> String {
+        var authors = ""
+        for author in (detailBook?.authors)! {
+            authors += String("\(author)")
+        }
+        return authors
+    }
+    
+    func image() {
+        if detailBook?.thumbnail != nil {
+            APIManager.manager.getData(endPoint: (detailBook?.thumbnail!)!, callback: { (data: Data?) in
+                guard let validData = data else { return }
+                DispatchQueue.main.async {
+                    self.detailBookImage.image = UIImage(data: validData)
+                    self.detailBookImage.setNeedsLayout()
+                }
+            })
+        }
     }
 
 

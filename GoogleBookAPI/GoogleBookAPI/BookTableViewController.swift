@@ -48,18 +48,20 @@ class BookTableViewController: UITableViewController {
         
         // Configure the cell...
         if let bookCell = cell as? BookTableViewCell {
-            let currentCell = books[indexPath.row]
+            let currentBook = books[indexPath.row]
             
-            bookCell.bookTitle?.text = currentCell.title
+            bookCell.bookTitle?.text = currentBook.title
             
             //image
-            APIManager.manager.getData(endPoint: currentCell.thumbnail, callback: { (data: Data?) in
-                guard let validData = data else { return }
-                DispatchQueue.main.async {
-                    bookCell.bookThumbnail?.image = UIImage(data: validData)
-                    bookCell.setNeedsLayout()
-                }
-            })
+            if currentBook.thumbnail != nil {
+                APIManager.manager.getData(endPoint: currentBook.thumbnail!, callback: { (data: Data?) in
+                    guard let validData = data else { return }
+                    DispatchQueue.main.async {
+                        bookCell.bookThumbnail?.image = UIImage(data: validData)
+                        bookCell.setNeedsLayout()
+                    }
+                })
+            }
         }
         return cell
     }
@@ -69,11 +71,12 @@ class BookTableViewController: UITableViewController {
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "bookDetailSegue" {
-            if let vc = segue.destination as? DetailViewController {
-                vc.detailBook = bookObject
-            }
+        if let dvc = segue.destination as? DetailViewController,
+            let cell = sender as? BookTableViewCell,
+            let indexpath = tableView.indexPath(for: cell) {
+            dvc.detailBook = books[indexpath.row]
         }
+        
     }
+    
 }

@@ -26,7 +26,7 @@ class Book {
     internal let authors: [String]
     internal let publishedDate: String
     internal let description: String
-    internal let thumbnail: String
+    internal let thumbnail: String?
     
     init(id: String, title: String, authors: [String], publishedDate: String, description: String, thumbnail: String) {
         self.id = id
@@ -68,7 +68,7 @@ class Book {
                         throw Parsing.published(volumeInfo: volumeInfoDict)
                 }
                 guard let imageLinks = volumeInfoDict["imageLinks"] as? [String: AnyObject],
-                    let thumbnail = imageLinks["thumbnail"] as? String else {
+                    let thumbnail = imageLinks["smallThumbnail"] as? String else {
                         throw Parsing.images(volumeInfo: volumeInfoDict)
                 }
                 
